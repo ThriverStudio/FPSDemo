@@ -6,7 +6,7 @@
 Application::Application()
 {
     // Logger
-    slogLoggerCreate(&m_Logger, "GLRenderer", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
+    slogLoggerCreate(&m_Logger, "FPS Demo", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
     Utils::SetLogger(&m_Logger);
 
     // Window
@@ -14,7 +14,7 @@ Application::Application()
         WindowInfo info{};
         info.width = 800;
         info.height = 600;
-        info.title = "GLRenderer";
+        info.title = "FPS Demo";
 
         m_Window = std::make_shared<Window>(info);
     }

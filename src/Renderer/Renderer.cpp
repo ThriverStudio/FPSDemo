@@ -11,7 +11,7 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 {
     m_Window = window;
 
-    m_Model.Init("assets/meshes/lion_head/lion_head_1k.gltf");
+    m_Model.Init("assets/meshes/coffee_table/coffee_table.gltf");
 
     m_Shader.Init("assets/shaders/default.glsl");
 
@@ -46,6 +46,7 @@ void Renderer::Render()
     {
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
+        glFrontFace(GL_CW);
         glCullFace(GL_BACK);
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
