@@ -24,7 +24,7 @@ private:
     std::vector<Mesh> m_Meshes;
     std::vector<Texture> m_Textures;
 
-    void ProcessNode(aiNode* node, const aiScene* scene);
-    Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+    void ProcessNode(aiNode* node, const aiScene* scene, glm::mat4 transform = glm::mat4(1.0f));
+    Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform);
     std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type);
 };

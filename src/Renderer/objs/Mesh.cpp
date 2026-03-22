@@ -2,10 +2,11 @@
 
 #include <glad/glad.h>
 
-void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, Texture* texture)
+void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, Texture* texture, glm::mat4&& transform)
 {
     m_VertCount = indices.size();
     m_Texture = texture;
+    m_Transform = transform;
 
     glGenVertexArrays(1, &m_Vao);
     glGenBuffers(1, &m_Vbo);
