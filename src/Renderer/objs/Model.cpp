@@ -37,10 +37,12 @@ void Model::Destroy()
         tex.Destroy();
 }
 
-void Model::Render()
+void Model::Render(std::string attributeName, Shader& shader)
 {
-    for (auto& mesh : m_Meshes)
-        mesh.Render();
+    for (auto& mesh : m_Meshes) {
+        shader.PutMat4(attributeName, mesh.GetTransform());
+        mesh.Render(m_Textures);
+    }
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene, glm::mat4 transform)
@@ -63,7 +65,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
 {
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
-    Texture* diffuseTexture = nullptr;
+    uint32_t diffuseTexture = -1;
 
     for (uint32_t i = 0; i < mesh->mNumVertices; i++)
     {
@@ -101,7 +103,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
         if (!textures.empty())
         {
             m_Textures.push_back(textures[0]);
-            diffuseTexture = &m_Textures.back();
+            diffuseTexture = m_Textures.size() - 1;
         }
     }
 

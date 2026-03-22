@@ -2,10 +2,10 @@
 
 #include <glad/glad.h>
 
-void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, Texture* texture, glm::mat4&& transform)
+void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, uint32_t textureIdx, glm::mat4&& transform)
 {
     m_VertCount = indices.size();
-    m_Texture = texture;
+    m_TextureIdx = textureIdx;
     m_Transform = transform;
 
     glGenVertexArrays(1, &m_Vao);
@@ -39,12 +39,13 @@ void Mesh::Destroy()
     glDeleteBuffers(1, &m_Ebo);
 }
 
-void Mesh::Render()
+void Mesh::Render(std::vector<Texture>& textureList)
 {
-    if (m_Texture)
+    Texture* texture = &textureList[m_TextureIdx];
+    if (texture)
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, m_Texture->GetHandle());
+        glBindTexture(GL_TEXTURE_2D, texture->GetHandle());
     }
 
     glBindVertexArray(m_Vao);

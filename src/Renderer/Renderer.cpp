@@ -11,7 +11,7 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 {
     m_Window = window;
 
-    m_Model.Init("assets/meshes/coffee_table/coffee_table.gltf");
+    m_Model.Init("assets/meshes/pistol/service_pistol_1k.gltf");
 
     m_Shader.Init("assets/shaders/default.glsl");
 
@@ -54,10 +54,9 @@ void Renderer::Render()
         m_Shader.Bind();
         m_Shader.PutMat4("proj", m_Camera.GetProjMat());
         m_Shader.PutMat4("view", m_Camera.GetViewMat());
-        m_Shader.PutMat4("model", glm::mat4(1.0f));
         m_Shader.PutTex("tex", 0);
 
-        m_Model.Render();
+        m_Model.Render("model", m_Shader);
 
         m_Skybox.Render(m_Camera);
     }

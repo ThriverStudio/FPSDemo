@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Texture.h"
+#include "Shader.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -17,7 +18,7 @@ public:
     void Init(std::string path);
     void Destroy();
 
-    void Render();
+    void Render(std::string attributeName, Shader& shader);
 
 private:
     std::string m_Dir;
