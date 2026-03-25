@@ -36,9 +36,9 @@ void Application::Run()
     while(m_Window->IsOpen())
     {
         m_Window->Clear();
-
+        
         Render();
-
+        
         Update();
     }
 }

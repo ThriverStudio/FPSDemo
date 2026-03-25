@@ -22,7 +22,6 @@ public:
 private:
     std::shared_ptr<Window> m_Window;
     float m_Delta, m_LastTime;
-    Framebuffer m_Fb;
     Camera m_Camera;
     Shader m_Shader;
     Model m_Model;

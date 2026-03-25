@@ -4,7 +4,7 @@
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
 
-void GuiHelper::Init(Window& window, bool dockspace)
+void GuiHelper::Init(std::shared_ptr<Window> window, bool dockspace)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -24,7 +24,7 @@ void GuiHelper::Init(Window& window, bool dockspace)
     style.WindowPadding = ImVec2(0.0f, 0.0f);
     style.FramePadding = ImVec2(5, 5);
 
-    ImGui_ImplGlfw_InitForOpenGL(window.GetHandle(), true);
+    ImGui_ImplGlfw_InitForOpenGL(window->GetHandle(), true);
     ImGui_ImplOpenGL3_Init("#version 330 core");    
 }
 
@@ -63,9 +63,9 @@ void GuiHelper::EndFrame()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void GuiHelper::Update(Window& window)
+void GuiHelper::Update(std::shared_ptr<Window> window)
 {
-    auto* backupctx = window.GetHandle();
+    auto* backupctx = window->GetHandle();
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
     glfwMakeContextCurrent(backupctx);
