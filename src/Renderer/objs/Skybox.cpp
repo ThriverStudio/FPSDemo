@@ -134,7 +134,6 @@ void Skybox::Init(const char* path)
     envMap.Active(1);
     envMap.Bind();
 
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     glDrawBuffer(GL_COLOR_ATTACHMENT0);
     glEnable(GL_DEPTH_TEST);
     glViewport(0, 0, 512, 512);

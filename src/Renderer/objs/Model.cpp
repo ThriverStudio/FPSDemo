@@ -33,7 +33,7 @@ void Model::Destroy()
     for (auto& mesh : m_Meshes)
         mesh.Destroy();
 
-    for (auto& tex : m_Textures)
+    for(auto& [name, tex] : m_Textures)
         tex.Destroy();
 }
 
@@ -65,7 +65,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
 {
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
-    uint32_t diffuseTexture = -1;
+    std::string diffuseTexture = "";
 
     for (uint32_t i = 0; i < mesh->mNumVertices; i++)
     {
@@ -98,12 +98,23 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
     if (mesh->mMaterialIndex >= 0)
     {
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        std::vector<Texture> textures = LoadMaterialTextures(material, aiTextureType_DIFFUSE); // Only diffuse textures for now
+        std::vector<std::string> textures = GetMaterialTextures(material, aiTextureType_DIFFUSE); // Only diffuse textures for now
         
         if (!textures.empty())
         {
-            m_Textures.push_back(textures[0]);
-            diffuseTexture = m_Textures.size() - 1;
+            if(m_Textures.count(textures[0]) == 0) {
+                int width, height, channels;
+                auto* data = stbi_load(textures[0].c_str(), &width, &height, &channels, 4);
+                if(!data)
+                {
+                    FATAL("Failed to load model texture. Reason by stb image :- " + std::string(stbi_failure_reason()))
+                }
+
+                Texture texture;
+                texture.Init(width, height, data);
+                m_Textures[textures[0]] = texture;
+            }
+            diffuseTexture = textures[0];
         }
     }
 
@@ -112,9 +123,9 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
     return newMesh;
 }
 
-std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type)
+std::vector<std::string> Model::GetMaterialTextures(aiMaterial* mat, aiTextureType type)
 {
-    std::vector<Texture> textures;
+    std::vector<std::string> textures;
 
     for (uint32_t i = 0; i < mat->GetTextureCount(type); i++)
     {
@@ -122,18 +133,19 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
         mat->GetTexture(type, i, &str);
 
         std::string path = m_Dir + std::string("/") + std::string(str.C_Str());
+        textures.push_back(path);
 
         // stbi_set_flip_vertically_on_load(true);
-        int width, height, channels;
-        auto* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
-        if(!data)
-        {
-            FATAL("Failed to load model texture. Reason by stb image :- " + std::string(stbi_failure_reason()))
-        }
+        // int width, height, channels;
+        // auto* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
+        // if(!data)
+        // {
+        //     FATAL("Failed to load model texture. Reason by stb image :- " + std::string(stbi_failure_reason()))
+        // }
 
-        Texture texture;
-        texture.Init(width, height, data);
-        textures.push_back(texture);
+        // Texture texture;
+        // texture.Init(width, height, data);
+        // textures.push_back(texture);
     }
 
     return textures;

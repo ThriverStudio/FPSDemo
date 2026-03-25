@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, uint32_t textureIdx, glm::mat4&& transform)
+void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, std::string textureIdx, glm::mat4&& transform)
 {
     m_VertCount = indices.size();
     m_TextureIdx = textureIdx;
@@ -39,7 +39,7 @@ void Mesh::Destroy()
     glDeleteBuffers(1, &m_Ebo);
 }
 
-void Mesh::Render(std::vector<Texture>& textureList)
+void Mesh::Render(std::unordered_map<std::string, Texture>& textureList)
 {
     Texture* texture = &textureList[m_TextureIdx];
     if (texture)
