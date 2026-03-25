@@ -2,6 +2,7 @@
 
 #include <string>
 #include <cstdint>
+#include <map>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -30,9 +31,11 @@ public:
     void PutInt(std::string name, int data);
     void PutFloat(std::string name, float data);
 private:
-    void ReadFile(std::string path); 
+    void ReadFile(std::string path);
+    uint32_t GetLocation(std::string name);
 
 private:
     std::string vSrc, fSrc;
     uint32_t m_vID, m_fID, m_pID;
+    std::unordered_map<std::string, uint32_t> m_Map;
 };
