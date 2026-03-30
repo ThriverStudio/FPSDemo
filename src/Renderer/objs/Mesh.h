@@ -21,7 +21,10 @@ public:
     void Destroy();
 
     void Render(std::unordered_map<std::string, Texture>& textureList);
-    inline const glm::mat4& GetTransform() { return m_Transform; }
+    inline glm::mat4& GetTransform() { return m_Transform; }
+
+private:
+    void GenerateLightMap();
 
 private:
     uint32_t m_VertCount;

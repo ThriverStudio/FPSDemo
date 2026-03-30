@@ -116,7 +116,7 @@ void Shader::Unbind()
     glUseProgram(0);
 }
 
-void Shader::PutTex(const std::string& name, int& texIndex)
+void Shader::PutTex(const std::string& name, int texIndex)
 {
     Bind();
     glActiveTexture(GL_TEXTURE0 + texIndex);
@@ -189,13 +189,13 @@ void Shader::PutMat4(const std::string& name, glm::mat4& data)
     glUniformMatrix4fv(GetLocation(name), 1, false, glm::value_ptr(data));
 }
 
-void Shader::PutInt(const std::string& name, int& data)
+void Shader::PutInt(const std::string& name, int data)
 {
     Bind();
     glUniform1i(GetLocation(name), data);
 }
 
-void Shader::PutFloat(const std::string& name, float& data)
+void Shader::PutFloat(const std::string& name, float data)
 {
     Bind();
     glUniform1f(GetLocation(name), data);    

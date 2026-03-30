@@ -53,3 +53,8 @@ void Mesh::Render(std::unordered_map<std::string, Texture>& textureList)
 
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void Mesh::GenerateLightMap()
+{
+
+}

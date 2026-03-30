@@ -10,12 +10,12 @@ class Camera
 public:
     void Update(Window& window, float aspectRatio, float deltaTime, float fov = 90.0f);
 
-    inline const glm::mat4& GetViewMat() { return m_View; }
-    inline const glm::mat4& GetProjMat() { return m_Proj; }
-    inline const glm::vec3& GetPos() { return m_CamPos; }
-    inline const glm::vec3& GetFront() { return m_CamFront; }
-    inline const glm::vec3& GetRight() { return m_CamRight; }
-    inline const glm::vec3& GetUp() { return m_CamUp; }
+    inline glm::mat4& GetViewMat() { return m_View; }
+    inline glm::mat4& GetProjMat() { return m_Proj; }
+    inline glm::vec3& GetPos() { return m_CamPos; }
+    inline glm::vec3& GetFront() { return m_CamFront; }
+    inline glm::vec3& GetRight() { return m_CamRight; }
+    inline glm::vec3& GetUp() { return m_CamUp; }
     inline glm::vec3 GetWorldUp() { return glm::vec3(0.0f, 1.0f, 0.0f); }
 private:
     glm::vec3 m_CamPos = glm::vec3(0, 0, 2);

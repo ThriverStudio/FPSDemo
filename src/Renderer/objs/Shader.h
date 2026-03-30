@@ -16,7 +16,7 @@ public:
     void Bind();
     void Unbind();
 
-    void PutTex(const std::string& name, int& texIndex);
+    void PutTex(const std::string& name, int texIndex);
     void PutVec2(const std::string& name, glm::vec2& data);
     void PutVec3(const std::string& name, glm::vec3& data);
     void PutVec4(const std::string& name, glm::vec4& data);
@@ -28,8 +28,8 @@ public:
     void PutDVec4(const std::string& name, glm::dvec4& data);
     void PutMat3(const std::string& name, glm::mat3& data);
     void PutMat4(const std::string& name, glm::mat4& data);
-    void PutInt(const std::string& name, int& data);
-    void PutFloat(const std::string& name, float& data);
+    void PutInt(const std::string& name, int data);
+    void PutFloat(const std::string& name, float data);
 private:
     void ReadFile(std::string path);
     uint32_t GetLocation(const std::string& name);
