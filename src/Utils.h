@@ -10,16 +10,15 @@
 
 namespace Utils
 {
-    static SLogger* logger = nullptr;
-    
-    static inline void SetLogger(SLogger* logger) 
-    {
-        Utils::logger = logger;
-    }
+    static SLogger logger = {};
 
     static inline SLogger* GetLogger() 
     {
-        return logger;
+        if(logger.name == nullptr) {
+            slogLoggerCreate(&logger, "FPS Demo", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
+        }
+
+        return &logger;
     }
 
     static inline std::string toLowerCase(std::string str)

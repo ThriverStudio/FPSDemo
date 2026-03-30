@@ -5,10 +5,6 @@
 
 Application::Application()
 {
-    // Logger
-    slogLoggerCreate(&m_Logger, "FPS Demo", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
-    Utils::SetLogger(&m_Logger);
-
     // Window
     {
         WindowInfo info{};
@@ -27,7 +23,7 @@ Application::Application()
 
 Application::~Application()
 {
-    slogLoggerDestroy(&m_Logger);
+    slogLoggerDestroy(Utils::GetLogger());
 }
 
 void Application::Run()
