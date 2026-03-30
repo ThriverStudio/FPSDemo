@@ -42,7 +42,8 @@ void Renderer::Render()
     m_Shader.Bind();
     m_Shader.PutMat4("proj", m_Camera.GetProjMat());
     m_Shader.PutMat4("view", m_Camera.GetViewMat());
-    m_Shader.PutTex("tex", 0);
+    m_Shader.PutTex("diffuseMap", 0);
+    m_Shader.PutTex("lightMap", 1);
 
     m_Model.Render("model", m_Shader);
 

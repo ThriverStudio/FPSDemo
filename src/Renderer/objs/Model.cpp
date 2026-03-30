@@ -41,7 +41,7 @@ void Model::Render(std::string attributeName, Shader& shader)
 {
     for (auto& mesh : m_Meshes) {
         shader.PutMat4(attributeName, mesh.GetTransform());
-        mesh.Render(m_Textures);
+        mesh.Render();
     }
 }
 
@@ -119,7 +119,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
     }
 
     Mesh newMesh;
-    newMesh.Init(vertices, indices, diffuseTexture, std::move(transform));
+    newMesh.Init(vertices, indices, diffuseTexture, m_Textures, std::move(transform));
     return newMesh;
 }
 
