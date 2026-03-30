@@ -41,6 +41,8 @@ void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, s
 
 void Mesh::Destroy()
 {
+    m_LightMap.Destroy();
+
     glDeleteVertexArrays(1, &m_Vao);
     glDeleteBuffers(1, &m_Vbo);
     glDeleteBuffers(1, &m_Ebo);
