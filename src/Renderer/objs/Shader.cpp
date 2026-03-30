@@ -116,92 +116,92 @@ void Shader::Unbind()
     glUseProgram(0);
 }
 
-void Shader::PutTex(std::string name, int texIndex)
+void Shader::PutTex(const std::string& name, int& texIndex)
 {
     Bind();
     glActiveTexture(GL_TEXTURE0 + texIndex);
     glUniform1i(GetLocation(name), texIndex);
 }
 
-void Shader::PutVec2(std::string name, glm::vec2 data)
+void Shader::PutVec2(const std::string& name, glm::vec2& data)
 {
     Bind();
     glUniform2f(GetLocation(name), data.x, data.y);
 }
 
-void Shader::PutVec3(std::string name, glm::vec3 data)
+void Shader::PutVec3(const std::string& name, glm::vec3& data)
 {
     Bind();
     glUniform3f(GetLocation(name), data.x, data.y, data.z);
 }
 
-void Shader::PutVec4(std::string name, glm::vec4 data)
+void Shader::PutVec4(const std::string& name, glm::vec4& data)
 {
     Bind();
     glUniform4f(GetLocation(name), data.x, data.y, data.z, data.w);
 }
 
-void Shader::PutIVec2(std::string name, glm::ivec2 data)
+void Shader::PutIVec2(const std::string& name, glm::ivec2& data)
 {
     Bind();
     glUniform2i(GetLocation(name), data.x, data.y);
 }
 
-void Shader::PutIVec3(std::string name, glm::ivec3 data)
+void Shader::PutIVec3(const std::string& name, glm::ivec3& data)
 {
     Bind();
     glUniform3i(GetLocation(name), data.x, data.y, data.z);
 }
 
-void Shader::PutIVec4(std::string name, glm::ivec4 data)
+void Shader::PutIVec4(const std::string& name, glm::ivec4& data)
 {
     Bind();
     glUniform4i(GetLocation(name), data.x, data.y, data.z, data.w);
 }
 
-void Shader::PutDVec2(std::string name, glm::dvec2 data)
+void Shader::PutDVec2(const std::string& name, glm::dvec2& data)
 {
     Bind();
     glUniform2d(GetLocation(name), data.x, data.y);
 }
 
-void Shader::PutDVec3(std::string name, glm::dvec3 data)
+void Shader::PutDVec3(const std::string& name, glm::dvec3& data)
 {
     Bind();
     glUniform3d(GetLocation(name), data.x, data.y, data.z);
 }
 
-void Shader::PutDVec4(std::string name, glm::dvec4 data)
+void Shader::PutDVec4(const std::string& name, glm::dvec4& data)
 {
     Bind();
     glUniform4d(GetLocation(name), data.x, data.y, data.z, data.w);
 }
 
-void Shader::PutMat3(std::string name, glm::mat3 data)
+void Shader::PutMat3(const std::string& name, glm::mat3& data)
 {
     Bind();
     glUniformMatrix3fv(GetLocation(name), 1, false, glm::value_ptr(data));
 }
 
-void Shader::PutMat4(std::string name, glm::mat4 data)
+void Shader::PutMat4(const std::string& name, glm::mat4& data)
 {
     Bind();
     glUniformMatrix4fv(GetLocation(name), 1, false, glm::value_ptr(data));
 }
 
-void Shader::PutInt(std::string name, int data)
+void Shader::PutInt(const std::string& name, int& data)
 {
     Bind();
     glUniform1i(GetLocation(name), data);
 }
 
-void Shader::PutFloat(std::string name, float data)
+void Shader::PutFloat(const std::string& name, float& data)
 {
     Bind();
     glUniform1f(GetLocation(name), data);    
 }
 
-uint32_t Shader::GetLocation(std::string name) {
+uint32_t Shader::GetLocation(const std::string& name) {
     if(m_Map.count(name) == 0) {
         m_Map[name] = glGetUniformLocation(m_pID, name.c_str());
     }
