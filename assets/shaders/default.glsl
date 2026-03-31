@@ -26,7 +26,6 @@ out vec4 FragColor;
 in vec2 oTexCoord;
 in vec3 oNormal;
 
-uniform sampler2D diffuseMap;
 uniform sampler2D lightMap;
 
 void main() {

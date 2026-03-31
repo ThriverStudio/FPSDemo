@@ -11,7 +11,7 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 {
     m_Window = window;
 
-    m_Model.Init("assets/meshes/pistol/service_pistol_1k.gltf");
+    m_Model.Init("assets/meshes/experiment/experiment.gltf");
 
     m_Shader.Init("assets/shaders/default.glsl");
 
@@ -42,8 +42,7 @@ void Renderer::Render()
     m_Shader.Bind();
     m_Shader.PutMat4("proj", m_Camera.GetProjMat());
     m_Shader.PutMat4("view", m_Camera.GetViewMat());
-    m_Shader.PutTex("diffuseMap", 0);
-    m_Shader.PutTex("lightMap", 1);
+    m_Shader.PutTex("lightMap", 0);
 
     m_Model.Render("model", m_Shader);
 

@@ -36,12 +36,12 @@ void Mesh::Init(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, s
         glBindVertexArray(0);
     }
 
-    GenerateLightMap(vertices, indices);
+    // GenerateLightMap(vertices, indices);
 }
 
 void Mesh::Destroy()
 {
-    m_LightMap.Destroy();
+    // m_LightMap.Destroy();
 
     glDeleteVertexArrays(1, &m_Vao);
     glDeleteBuffers(1, &m_Vbo);
@@ -55,8 +55,8 @@ void Mesh::Render()
     {
         texture->Active(1);
         texture->Bind();
-        m_LightMap.Active(2);
-        m_LightMap.Bind();
+        // m_LightMap.Active(2);
+        // m_LightMap.Bind();
     }
 
     glBindVertexArray(m_Vao);

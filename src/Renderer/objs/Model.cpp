@@ -98,7 +98,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
     if (mesh->mMaterialIndex >= 0)
     {
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        std::vector<std::string> textures = GetMaterialTextures(material, aiTextureType_DIFFUSE); // Only diffuse textures for now
+        std::vector<std::string> textures = GetMaterialTextures(material, aiTextureType_DIFFUSE); // Only lightmaps textures for now
         
         if (!textures.empty())
         {
