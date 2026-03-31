@@ -5,7 +5,7 @@
 class Texture
 {
 public:
-    void Init(int32_t width, int32_t height, void* pixels = nullptr, bool isDepth = false, bool isFloat = false);
+    void Init(int32_t width, int32_t height, void* pixels = nullptr, bool isDepth = false, bool isFloat = false, bool isColAttachment = false);
     void Destroy();
 
     void Resize(int32_t width, int32_t height);
@@ -24,5 +24,5 @@ private:
     int32_t m_Width = 0, m_Height = 0;
     uint32_t m_Handle = 0;
     void* m_Pixels = nullptr;
-    bool m_IsDepth = false, m_IsFloat = false;
+    bool m_IsDepth = false, m_IsFloat = false, m_IsColAttachment = false;
 };

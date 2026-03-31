@@ -2,18 +2,29 @@
 
 #include <glad/glad.h>
 
-void Texture::Init(int32_t width, int32_t height, void* pixels, bool isDepth, bool isFloat)
+void Texture::Init(int32_t width, int32_t height, void* pixels, bool isDepth, bool isFloat, bool isColAttachment)
 {
     m_Width = width;
     m_Height = height;
     m_Pixels = pixels;
     m_IsDepth = isDepth;
     m_IsFloat = isFloat;
+    m_IsColAttachment = isColAttachment;
 
     glGenTextures(1, &m_Handle);
     glBindTexture(GL_TEXTURE_2D, m_Handle);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    if(!isColAttachment) 
+    {
+        float max;
+        glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max);
+    }
+    else 
+    { 
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -31,7 +42,8 @@ void Texture::Init(int32_t width, int32_t height, void* pixels, bool isDepth, bo
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     }
 
-    glGenerateMipmap(GL_TEXTURE_2D);
+    if(!isColAttachment)
+        glGenerateMipmap(GL_TEXTURE_2D);
     
     glBindTexture(GL_TEXTURE_2D, 0);
 }

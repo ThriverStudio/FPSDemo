@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 #include <cassert>
+#include <cstring>
 
 #include <GLFW/glfw3.h>
 
@@ -77,6 +78,10 @@ Window::Window(WindowInfo& info)
 		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 	}
 #endif
+
+	if (!GLAD_GL_EXT_texture_filter_anisotropic) {
+		FATAL("The GPU doesn't supports anisotropic filtering!");
+	}
 
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, info.width, info.height);
