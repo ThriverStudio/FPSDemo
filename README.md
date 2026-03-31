@@ -6,3 +6,4 @@ Currently under development. This is the first game of ThriverStudios.
 ## Glimpses
 
  ![Image0](screenshots/img0.png)
+ ![Image1](screenshots/img1.png)
