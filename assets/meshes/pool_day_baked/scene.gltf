@@ -295,27 +295,27 @@
 		{
 			"mimeType":"image/png",
 			"name":"Pool_Day_material_2.tga",
-			"uri":"texture/Pool_Day_material_2.tga.png"
+			"uri":"textures/Pool_Day_material_2.tga.png"
 		},
 		{
 			"mimeType":"image/jpeg",
 			"name":"far8",
-			"uri":"texture/far8.jpg"
+			"uri":"textures/far8.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
 			"name":"near8",
-			"uri":"texture/near8.jpg"
+			"uri":"textures/near8.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
 			"name":"sky",
-			"uri":"texture/sky.jpg"
+			"uri":"textures/sky.jpg"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"Pool_Day_material_23a",
-			"uri":"texture/Pool_Day_material_23a.png"
+			"uri":"textures/Pool_Day_material_23a.png"
 		}
 	],
 	"accessors":[
@@ -621,7 +621,7 @@
 	"buffers":[
 		{
 			"byteLength":195148,
-			"uri":"Pool_Day.bin"
+			"uri":"scene.bin"
 		}
 	]
 }
