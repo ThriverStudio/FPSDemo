@@ -46,11 +46,9 @@ void Framebuffer::Resize(int32_t width, int32_t height)
 void Framebuffer::Bind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_Handle);
-    m_ColAttach.Bind();
 }
 
 void Framebuffer::Unbind()
 {
-    m_ColAttach.Unbind();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

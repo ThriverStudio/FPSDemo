@@ -14,8 +14,6 @@ public:
     void Bind();
     void Unbind();
 
-    void GetPixels(unsigned char* pixels);
-
     void SetPixels(unsigned char* pixels);
 
     inline uint32_t GetHandle() const { return m_Handle; }
