@@ -25,5 +25,4 @@ private:
     Camera m_Camera;
     Shader m_Shader;
     Model m_Model;
-    Skybox m_Skybox;
 };

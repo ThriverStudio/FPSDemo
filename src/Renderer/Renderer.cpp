@@ -11,11 +11,9 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 {
     m_Window = window;
 
-    m_Model.Init("assets/meshes/experiment/experiment.gltf");
+    m_Model.Init("assets/meshes/pool_day_baked/scene.gltf");
 
     m_Shader.Init("assets/shaders/default.glsl");
-
-    m_Skybox.Init("assets/skybox/1.hdr");
 
     GuiHelper::Init(m_Window, false);
 }
@@ -24,7 +22,6 @@ Renderer::~Renderer()
 {
     GuiHelper::Shutdown();
 
-    m_Skybox.Destroy();
     m_Model.Destroy();
     m_Shader.Destroy();
 }
@@ -45,8 +42,6 @@ void Renderer::Render()
     m_Shader.PutTex("lightMap", 0);
 
     m_Model.Render("model", m_Shader);
-
-    m_Skybox.Render(m_Camera);
  
     // ImGui rendering
     GuiHelper::StartFrame();
