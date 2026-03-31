@@ -5,5 +5,4 @@ Currently under development. This is the first game of ThriverStudios.
 
 ## Glimpses
 
-Some pistols :- 
- ![pistols](screenshots/img0.png)
+ ![Image0](screenshots/img0.png)
