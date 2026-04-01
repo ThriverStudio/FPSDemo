@@ -23,6 +23,9 @@ private:
     std::shared_ptr<Window> m_Window;
     float m_Delta, m_LastTime;
     Camera m_Camera;
-    Shader m_Shader;
+    Shader m_SceneShader, m_FinalPassShader;
     Model m_Model;
+
+    Framebuffer m_Fb;
+    uint32_t m_QuadVao, m_QuadVbo;
 };
