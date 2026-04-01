@@ -11,11 +11,15 @@ uniform mat4 view;
 
 out vec2 oTexCoord;
 out vec3 oNormal;
+out vec3 oFragPos;
 
 void main() {
-	gl_Position = proj * view * model * vec4(pos, 1.0);
+	vec4 worldPos = model * vec4(pos, 1.0);
+	gl_Position = proj * view * worldPos;
+	
 	oTexCoord = texCoord;
 	oNormal = normal;
+	oFragPos = worldPos.xyz;
 }
 
 @type fragment
@@ -25,6 +29,10 @@ out vec4 FragColor;
 
 in vec2 oTexCoord;
 in vec3 oNormal;
+in vec3 oFragPos;
+
+uniform vec3 cameraPos;
+uniform float maxMipLevel;
 
 uniform sampler2D lightMap;
 

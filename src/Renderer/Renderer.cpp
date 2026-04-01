@@ -13,7 +13,7 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 
     m_Model.Init("assets/meshes/pool_day_baked/scene.gltf");
 
-    m_Fb.Init(window->GetWindowInfo().width/2, window->GetWindowInfo().height/2);
+    m_Fb.Init(window->GetWindowInfo().width, window->GetWindowInfo().height);
     m_SceneShader.Init("assets/shaders/scene.glsl");
     m_FinalPassShader.Init("assets/shaders/final.glsl");
 
@@ -68,7 +68,7 @@ void Renderer::Render()
         return;
 
     // Main Rendering
-    m_Fb.Resize(m_Window->GetWindowInfo().width/2, m_Window->GetWindowInfo().height/2);
+    m_Fb.Resize(m_Window->GetWindowInfo().width, m_Window->GetWindowInfo().height);
     m_Fb.Bind();
     glViewport(0, 0, m_Fb.GetColorAttachment().GetWidth(), m_Fb.GetColorAttachment().GetHeight());
     {
@@ -82,6 +82,7 @@ void Renderer::Render()
         m_SceneShader.Bind();
         m_SceneShader.PutMat4("proj", m_Camera.GetProjMat());
         m_SceneShader.PutMat4("view", m_Camera.GetViewMat());
+        m_SceneShader.PutVec3("cameraPos", m_Camera.GetPos());
         m_SceneShader.PutTex("lightMap", 0);
         
         m_Model.Render("model", m_SceneShader);
