@@ -1,7 +1,8 @@
-# FPSDemo
+# FPS Game
 
-This is a small, first person shooter styled, demo game. It is made in C++ with OpenGL.
+This is a small, first person shooter styled, game. It is made in C++ with OpenGL.
 Currently under development. This is the first game of ThriverStudios.
+Also, the name is yet to decide.
 
 ## Technical details
 
