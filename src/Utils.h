@@ -15,7 +15,7 @@ namespace Utils
     static inline SLogger* GetLogger() 
     {
         if(logger.name == nullptr) {
-            slogLoggerCreate(&logger, "FPS Demo", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
+            slogLoggerCreate(&logger, "FPS Game", nullptr, SLOG_LOGGER_FEATURE_LOG2CONSOLE);
         }
 
         return &logger;

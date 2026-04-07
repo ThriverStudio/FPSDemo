@@ -10,7 +10,7 @@ Application::Application()
         WindowInfo info{};
         info.width = 800;
         info.height = 600;
-        info.title = "FPS Demo";
+        info.title = "FPS Game";
 
         m_Window = std::make_shared<Window>(info);
     }
