@@ -113,6 +113,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, glm::mat4 transform)
                 Texture texture;
                 texture.Init(width, height, data);
                 m_Textures[textures[0]] = texture;
+                stbi_image_free(data);
             }
             diffuseTexture = textures[0];
         }
@@ -134,18 +135,6 @@ std::vector<std::string> Model::GetMaterialTextures(aiMaterial* mat, aiTextureTy
 
         std::string path = m_Dir + std::string("/") + std::string(str.C_Str());
         textures.push_back(path);
-
-        // stbi_set_flip_vertically_on_load(true);
-        // int width, height, channels;
-        // auto* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
-        // if(!data)
-        // {
-        //     FATAL("Failed to load model texture. Reason by stb image :- " + std::string(stbi_failure_reason()))
-        // }
-
-        // Texture texture;
-        // texture.Init(width, height, data);
-        // textures.push_back(texture);
     }
 
     return textures;

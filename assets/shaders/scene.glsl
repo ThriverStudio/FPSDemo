@@ -36,5 +36,11 @@ uniform vec3 cameraPos;
 uniform sampler2D u_Albedo;
 
 void main() {
-	FragColor = texture(u_Albedo, oTexCoord);
+	vec4 color = texture(u_Albedo, oTexCoord);
+	color.rgb = pow(color.rgb, vec3(2.2));
+	if(color.a < 0.5)
+		discard;
+	FragColor = color;
+	FragColor.rgb = FragColor.rgb / (FragColor.rgb + 1.0);
+	FragColor.rgb = pow(FragColor.rgb, vec3(1.0/2.2));
 }

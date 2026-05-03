@@ -24,7 +24,7 @@ public:
     inline glm::mat4& GetTransform() { return m_Transform; }
 
 private:
-    void GenerateLightMap(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
+    // void GenerateLightMap(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
 
 private:
     uint32_t m_VertCount;
