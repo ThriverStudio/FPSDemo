@@ -69,11 +69,12 @@ Renderer::~Renderer()
 
 void Renderer::Render()
 {
-    if(!m_Window->GetWindowInfo().width || !m_Window->GetWindowInfo().height)
+    WindowInfo winInfo = m_Window->GetWindowInfo();
+    if(!winInfo.width || !winInfo.height)
         return;
 
     // Main Rendering
-    m_Fb.Resize(m_Window->GetWindowInfo().width, m_Window->GetWindowInfo().height);
+    m_Fb.Resize(winInfo.width, winInfo.height);
     m_Fb.Bind();
     glViewport(0, 0, m_Fb.GetColorAttachment().GetWidth(), m_Fb.GetColorAttachment().GetHeight());
     {
@@ -92,7 +93,7 @@ void Renderer::Render()
     }
 
     m_Fb.Unbind();
-    glViewport(0, 0, m_Window->GetWindowInfo().width, m_Window->GetWindowInfo().height);
+    glViewport(0, 0, winInfo.width, winInfo.height);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Rendering the quad while resampling in the final shader
@@ -121,6 +122,12 @@ void Renderer::Render()
     ImGui::Text("%.0f FPS", 1/m_Delta);
 
     ImGui::End();
+
+    // Text rendering
+    {
+        ImDrawList* list = ImGui::GetBackgroundDrawList();
+        list->AddText(ImVec2(winInfo.xpos + 50, winInfo.ypos + 50), 0xff000000, "Hello Guys!! This is text rendered using ImGui!!");
+    }
 
     GuiHelper::EndFrame();
     GuiHelper::Update(m_Window);
