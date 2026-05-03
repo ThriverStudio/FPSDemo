@@ -11,7 +11,8 @@ Renderer::Renderer(std::shared_ptr<Window> window)
 {
     m_Window = window;
 
-    m_Model.Init("assets/meshes/pool_day_baked/scene.gltf");
+    m_Model.Init("assets/meshes/pistol/service_pistol_1k.gltf");
+    m_Skybox.Init("assets/skybox/1.hdr");
 
     m_Fb.Init(window->GetWindowInfo().width, window->GetWindowInfo().height);
     m_SceneShader.Init("assets/shaders/scene.glsl");
@@ -47,6 +48,9 @@ Renderer::Renderer(std::shared_ptr<Window> window)
     }
 
     GuiHelper::Init(m_Window, false);
+
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
 }
 
 Renderer::~Renderer()
@@ -56,6 +60,7 @@ Renderer::~Renderer()
     glDeleteBuffers(1, &m_QuadVbo);
     glDeleteVertexArrays(1, &m_QuadVao);
 
+    m_Skybox.Destroy();
     m_Model.Destroy();
     m_Fb.Destroy();
     m_FinalPassShader.Destroy();
@@ -74,18 +79,16 @@ void Renderer::Render()
     {
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        glFrontFace(GL_CW);
-        glCullFace(GL_BACK);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         m_SceneShader.Bind();
         m_SceneShader.PutMat4("proj", m_Camera.GetProjMat());
         m_SceneShader.PutMat4("view", m_Camera.GetViewMat());
         m_SceneShader.PutVec3("cameraPos", m_Camera.GetPos());
-        m_SceneShader.PutTex("lightMap", 0);
+        m_SceneShader.PutTex("u_Albedo", 0);
         
         m_Model.Render("model", m_SceneShader);
+        m_Skybox.Render(m_Camera);
     }
 
     m_Fb.Unbind();

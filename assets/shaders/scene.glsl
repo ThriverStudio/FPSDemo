@@ -32,10 +32,9 @@ in vec3 oNormal;
 in vec3 oFragPos;
 
 uniform vec3 cameraPos;
-uniform float maxMipLevel;
 
-uniform sampler2D lightMap;
+uniform sampler2D u_Albedo;
 
 void main() {
-	FragColor = texture(lightMap, oTexCoord);
+	FragColor = texture(u_Albedo, oTexCoord);
 }

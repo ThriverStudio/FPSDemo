@@ -25,6 +25,7 @@ private:
     Camera m_Camera;
     Shader m_SceneShader, m_FinalPassShader;
     Model m_Model;
+    Skybox m_Skybox;
 
     Framebuffer m_Fb;
     uint32_t m_QuadVao, m_QuadVbo;
