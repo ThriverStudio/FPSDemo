@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
 #include "GuiHelper.h"
+#include "Window/Input.h"
 
 #include <imgui/imgui.h>
 
@@ -102,7 +103,11 @@ void Renderer::Render()
         glDisable(GL_CULL_FACE);
         
         m_FinalPassShader.Bind();        
-        m_FinalPassShader.PutTex("scene", 0);
+        m_FinalPassShader.PutTex("u_Scene", 0);
+        if(Input::IsKeyPressed(*m_Window, GLFW_KEY_G))
+            m_FinalPassShader.PutInt("u_ShowGrey", 1);
+        else
+            m_FinalPassShader.PutInt("u_ShowGrey", 0);
         
         m_Fb.GetColorAttachment().Active(1);
         m_Fb.GetColorAttachment().Bind();
@@ -116,18 +121,13 @@ void Renderer::Render()
     // ImGui rendering
     GuiHelper::StartFrame();
 
-    ImGui::Begin("Stats");
+    ImGui::Begin("Info");
 
     ImGui::Text("Delta Time :- %0.2fms", m_Delta * 1000);
     ImGui::Text("%.0f FPS", 1/m_Delta);
+    ImGui::Text("Press 'G' for grey scaled output!!");
 
     ImGui::End();
-
-    // Text rendering
-    {
-        ImDrawList* list = ImGui::GetBackgroundDrawList();
-        list->AddText(ImVec2(winInfo.xpos + 50, winInfo.ypos + 50), 0xff000000, "Hello Guys!! This is text rendered using ImGui!!");
-    }
 
     GuiHelper::EndFrame();
     GuiHelper::Update(m_Window);

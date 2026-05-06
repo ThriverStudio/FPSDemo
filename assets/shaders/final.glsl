@@ -17,9 +17,11 @@ void main() {
 out vec4 FragColor;
 in vec2 oTexCoords;
 
-uniform sampler2D scene;
+uniform sampler2D u_Scene;
+uniform int u_ShowGrey;
 
 void main() {
-    // TODO: Add post processing effects here later
-    FragColor = texture(scene, oTexCoords);
+    vec3 grey_vec = vec3(0.21, 0.71, 0.07);
+    vec3 color = texture(u_Scene, oTexCoords).rgb;
+    FragColor = (u_ShowGrey == 1) ? vec4(vec3(dot(grey_vec, color)), 1.0) : vec4(color, 1.0);
 }
