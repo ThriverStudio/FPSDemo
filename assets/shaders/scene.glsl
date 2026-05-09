@@ -36,11 +36,20 @@ uniform vec3 cameraPos;
 uniform sampler2D u_Albedo;
 
 void main() {
-	vec4 color = texture(u_Albedo, oTexCoord);
-	color.rgb = pow(color.rgb, vec3(2.2));
-	if(color.a < 0.5)
+	vec4 albedo = texture(u_Albedo, oTexCoord);
+	albedo.rgb = pow(albedo.rgb, vec3(2.2));
+	if(albedo.a < 0.5)
 		discard;
-	FragColor = color;
+
+	vec3 lightPos = vec3(0, 1, 1);
+	float dist = dot(lightPos - oFragPos, lightPos - oFragPos);
+	float attenuation = 1.0 / dist;
+	float diffuse = max(dot(normalize(lightPos - oFragPos), oNormal), 0.0);
+	const float ambient = 0.01;
+	float specular = pow(max(dot(normalize(cameraPos - oFragPos), reflect(-normalize(lightPos - oFragPos), oNormal)), 0.0), 128);
+	vec3 color = albedo.rgb * attenuation * (diffuse + specular) + ambient;
+	
+	FragColor = vec4(color, 1.0);
 	FragColor.rgb = FragColor.rgb / (FragColor.rgb + 1.0);
 	FragColor.rgb = pow(FragColor.rgb, vec3(1.0/2.2));
 }
