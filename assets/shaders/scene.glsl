@@ -42,11 +42,15 @@ void main() {
 		discard;
 
 	vec3 lightPos = vec3(0, 1, 1);
-	float dist = dot(lightPos - oFragPos, lightPos - oFragPos);
+	vec3 lightDir = lightPos - oFragPos;
+	float dist = dot(lightDir, lightDir);
+	lightDir = normalize(lightDir);
+	vec3 cameraDir = normalize(cameraPos - oFragPos);
+
 	float attenuation = 1.0 / dist;
-	float diffuse = max(dot(normalize(lightPos - oFragPos), oNormal), 0.0);
+	float diffuse = max(dot(lightDir, oNormal), 0.0);
 	const float ambient = 0.01;
-	float specular = pow(max(dot(normalize(cameraPos - oFragPos), reflect(-normalize(lightPos - oFragPos), oNormal)), 0.0), 128);
+	float specular = pow(max(dot(cameraDir, reflect(-lightDir, oNormal)), 0.0), 128);
 	vec3 color = albedo.rgb * attenuation * (diffuse + specular) + ambient;
 	
 	FragColor = vec4(color, 1.0);
